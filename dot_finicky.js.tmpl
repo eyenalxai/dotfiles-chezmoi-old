@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.os "darwin" }}
+module.exports = {
+  defaultBrowser: "Safari",
+  handlers: [
+    {
+      match: ["youtube.com/*", "www.youtube.com/*", "youtu.be/*"],
+      browser: "Google Chrome"
+    }
+  ],
+  options: {
+    hideIcon: true,
+  }
+};
+{{- end }}
+
