@@ -69,6 +69,12 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  -- Rust --
+  'rust-lang/rust.vim',
+
+  -- GitHub Copilot --
+  'github/copilot.vim',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -211,6 +217,25 @@ require('lazy').setup({
 
 -- Set highlight on search
 vim.o.hlsearch = false
+
+-- Enable selection of Copilot's completions --
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
+
+local cmp = require "cmp"
+cmp.setup.buffer({
+  mapping = {
+    ["<C-e>"] = function(fallback)
+      local copilot_keys = vim.fn["copilot#Accept"]()
+      if copilot_keys ~= "" then
+        vim.api.nvim_feedkeys(copilot_keys, "i", true)
+      else
+        fallback()
+      end
+    end,
+  },
+})
 
 -- Make line numbers default
 vim.wo.number = true
