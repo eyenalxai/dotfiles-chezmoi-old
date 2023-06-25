@@ -19,3 +19,12 @@ eval "$(pyenv init -)"
 # Docker
 source /Users/ulsippoi/.docker/init-zsh.sh || true
 {{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+EDITOR=/usr/bin/nvim
+
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source /usr/share/fzf/shell/key-bindings.zsh
+{{- end }}
