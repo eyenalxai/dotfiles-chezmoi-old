@@ -1,0 +1,10 @@
+[include]
+	path = ~/.config/git/config-personal
+[core]
+	autocrlf = input
+	editor = nvim
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
