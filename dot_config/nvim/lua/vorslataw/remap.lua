@@ -1,0 +1,6 @@
+vim.g.mapleader = " "
+
+-- File Viewer
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
