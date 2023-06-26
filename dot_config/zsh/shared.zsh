@@ -37,7 +37,9 @@ export PATH=$N_PREFIX/bin:$PATH
 
 # My stuff
 PATH="${HOME}/.local/bin:${PATH}"
-PATH="${HOME}/.local/bin/video-download/target/release:${PATH}"
+
+# Yarn global
+PATH="${HOME}/.yarn/bin:${PATH}"
 
 # Zoxide
 eval "$(zoxide init zsh)"
