@@ -12,3 +12,9 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+-- Code Actions
+vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { noremap = true, silent = true })
+
+-- Smart Rename
+vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
