@@ -1,6 +1,6 @@
 local lsp = require('lsp-zero').preset({})
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 end)
 
@@ -14,7 +14,7 @@ lsp.format_on_save({
   },
   servers = {
     ['rust_analyzer'] = {'rust'},
-    ['null-ls'] = {'typescript'},
+    ['null-ls'] = {'typescript', 'javascript', 'python'},
   }
 })
 
