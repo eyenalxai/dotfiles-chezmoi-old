@@ -14,6 +14,7 @@ lsp.format_on_save({
   },
   servers = {
     ['rust_analyzer'] = {'rust'},
+    ['null-ls'] = {'typescript'},
   }
 })
 

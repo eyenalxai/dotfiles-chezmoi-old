@@ -18,4 +18,8 @@ return require('packer').startup(function(use)
   use { 'williamboman/mason.nvim', run = ":MasonUpdate" }
   use 'williamboman/mason-lspconfig.nvim'
 
+  -- null-ls
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'nvim-lua/plenary.nvim'
+
 end)
