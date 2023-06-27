@@ -11,6 +11,7 @@ lsp.on_attach(function(_, bufnr)
 	vim.keymap.set("n", "<leader>gS", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
 	vim.keymap.set("n", "<leader>gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 	vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<cr>", opts)
+	vim.keymap.set("n", "<leader>vd", "<cmd>Telescope diagnostics<cr>", opts)
 end)
 
 -- (Optional) Configure lua language server for neovim

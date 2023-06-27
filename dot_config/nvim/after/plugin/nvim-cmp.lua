@@ -14,6 +14,6 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s", "c" }),
+		end, { "i" }),
 	},
 })
