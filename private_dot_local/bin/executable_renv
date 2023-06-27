@@ -1,0 +1,81 @@
+#!/usr/bin/env rust-script
+//! ```cargo
+//! [dependencies]
+//! dotenv = "0.15.0"
+//! ```
+
+use std::{
+    collections::HashMap,
+    env,
+    fs::File,
+    io::{BufRead, BufReader},
+    process::Command,
+};
+
+fn main() {
+    // Load environment variables from .env file
+    let env_vars = match load_env() {
+        Ok(env_vars) => env_vars,
+        Err(err) => {
+            eprintln!("Error: {}", err);
+            return;
+        }
+    };
+
+    // Get command and arguments from command line arguments
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: renv <command> <arguments...>");
+        return;
+    }
+
+    // Run the command with the specified arguments and environment variables
+    let command = &args[1];
+    let command_args = &args[2..];
+
+    let mut cmd = Command::new(command);
+    cmd.args(command_args);
+
+    // Set the environment variables manually
+    for (key, value) in env_vars.iter() {
+        cmd.env(key, value);
+    }
+
+    // Execute the command and wait for it to finish
+    match cmd.status() {
+        Ok(status) => {
+            if !status.success() {
+                eprintln!("Error: Command failed with status {}", status);
+            }
+        }
+        Err(err) => {
+            eprintln!("Error: Failed to execute command - {}", err);
+        }
+    }
+}
+
+fn load_env() -> Result<HashMap<String, String>, String> {
+    let file = File::open(".env").map_err(|e| format!("Failed to open .env file - {}", e))?;
+    let reader = BufReader::new(file);
+
+    let mut env_vars = HashMap::new();
+
+    for line in reader.lines() {
+        let line = line.map_err(|e| format!("Failed to read .env file - {}", e))?;
+        let mut parts = line.splitn(2, '=');
+        let key = parts
+            .next()
+            .ok_or("Failed to parse key from .env file")?
+            .trim()
+            .to_owned();
+        let value = parts
+            .next()
+            .ok_or("Failed to parse value from .env file")?
+            .trim()
+            .to_owned();
+        env_vars.insert(key, value);
+    }
+
+    Ok(env_vars)
+}
+
