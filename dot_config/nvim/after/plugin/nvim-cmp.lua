@@ -1,6 +1,9 @@
 local cmp = require("cmp")
 
 cmp.setup({
+	sources = {
+		{ name = "copilot", group_index = 2 },
+	},
 	mapping = {
 		["<Tab>"] = cmp.mapping(function(fallback)
 			-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
