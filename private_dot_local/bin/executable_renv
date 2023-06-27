@@ -13,7 +13,6 @@ use std::{
 };
 
 fn main() {
-    // Load environment variables from .env file
     let env_vars = match load_env() {
         Ok(env_vars) => env_vars,
         Err(err) => {
@@ -22,26 +21,22 @@ fn main() {
         }
     };
 
-    // Get command and arguments from command line arguments
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
         eprintln!("Usage: renv <command> <arguments...>");
         return;
     }
 
-    // Run the command with the specified arguments and environment variables
     let command = &args[1];
     let command_args = &args[2..];
 
     let mut cmd = Command::new(command);
     cmd.args(command_args);
 
-    // Set the environment variables manually
     for (key, value) in env_vars.iter() {
         cmd.env(key, value);
     }
 
-    // Execute the command and wait for it to finish
     match cmd.status() {
         Ok(status) => {
             if !status.success() {
@@ -62,6 +57,11 @@ fn load_env() -> Result<HashMap<String, String>, String> {
 
     for line in reader.lines() {
         let line = line.map_err(|e| format!("Failed to read .env file - {}", e))?;
+    
+        if line.trim().is_empty() {
+            continue;
+        }
+
         let mut parts = line.splitn(2, '=');
         let key = parts
             .next()
