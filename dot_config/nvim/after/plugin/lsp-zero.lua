@@ -1,6 +1,6 @@
 local lsp = require("lsp-zero").preset({})
 
-lsp.on_attach(function(_, bufnr)
+local function on_attach(_, bufnr)
 	local opts = { buffer = bufnr }
 	lsp.default_keymaps(opts)
 
@@ -12,10 +12,7 @@ lsp.on_attach(function(_, bufnr)
 	vim.keymap.set("n", "<leader>gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 	vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<cr>", opts)
 	vim.keymap.set("n", "<leader>vd", "<cmd>Telescope diagnostics<cr>", opts)
-end)
-
--- (Optional) Configure lua language server for neovim
-require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+end
 
 lsp.format_on_save({
 	format_opts = {
@@ -28,4 +25,23 @@ lsp.format_on_save({
 	},
 })
 
-lsp.setup()
+lsp.setup({
+	on_attach = on_attach,
+})
+
+local lspconfig = require("lspconfig")
+
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+
+lspconfig["pyright"].setup({
+	settings = {
+		python = {
+			analysis = {
+				indexing = true,
+				autoImportCompletions = true,
+				autoSearchPaths = true,
+				packageIndexDepths = { { "", 3 } },
+			},
+		},
+	},
+})
