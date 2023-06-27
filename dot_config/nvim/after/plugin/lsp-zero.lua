@@ -1,6 +1,6 @@
 local lsp = require("lsp-zero").preset({})
 
-local function on_attach(_, bufnr)
+lsp.on_attach(function(_, bufnr)
 	local opts = { buffer = bufnr }
 	lsp.default_keymaps(opts)
 
@@ -11,8 +11,7 @@ local function on_attach(_, bufnr)
 	vim.keymap.set("n", "<leader>gS", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
 	vim.keymap.set("n", "<leader>gd", "<cmd>Telescope lsp_definitions<cr>", opts)
 	vim.keymap.set("n", "<leader>gt", "<cmd>Telescope lsp_type_definitions<cr>", opts)
-	vim.keymap.set("n", "<leader>vd", "<cmd>Telescope diagnostics<cr>", opts)
-end
+end)
 
 lsp.format_on_save({
 	format_opts = {
@@ -25,9 +24,7 @@ lsp.format_on_save({
 	},
 })
 
-lsp.setup({
-	on_attach = on_attach,
-})
+lsp.setup()
 
 local lspconfig = require("lspconfig")
 

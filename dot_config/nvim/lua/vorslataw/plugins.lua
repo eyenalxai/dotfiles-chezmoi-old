@@ -5,6 +5,9 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	-- NERD Commenter
+	use("preservim/nerdcommenter")
+
 	-- Vig Fugitive
 	use("tpope/vim-fugitive")
 
