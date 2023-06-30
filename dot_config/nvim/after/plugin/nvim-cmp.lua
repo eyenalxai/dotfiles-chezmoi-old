@@ -2,6 +2,9 @@ local cmp = require("cmp")
 
 cmp.setup({
 	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+		{ name = "path" },
 		{ name = "copilot", group_index = 2 },
 	},
 	mapping = {
