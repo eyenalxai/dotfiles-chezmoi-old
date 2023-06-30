@@ -43,9 +43,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- NERD Commenter
-	use("preservim/nerdcommenter")
-
 	-- Vig Fugitive
 	use("tpope/vim-fugitive")
 

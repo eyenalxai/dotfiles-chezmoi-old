@@ -20,7 +20,7 @@ lsp.format_on_save({
 	},
 	servers = {
 		["rust_analyzer"] = { "rust" },
-		["null-ls"] = { "typescript", "javascript", "python", "lua" },
+		["null-ls"] = { "typescript", "javascript", "python", "lua", "typescriptreact" },
 	},
 })
 
